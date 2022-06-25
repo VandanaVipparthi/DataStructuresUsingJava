@@ -1,0 +1,56 @@
+package stacks;
+import java.util.*;
+public class queueusingStack2 {
+		static class Queue{
+				Stack<Integer> s;
+		}
+		static void push(Stack<Integer> s1,int x) {
+			s1.push(x);
+		}
+		static int pop(Stack<Integer> s2) {
+			if(s2==null) {
+				System.out.println("Underflow..");
+				System.exit(0);
+			}
+			return s2.pop();
+		}
+		
+		static void enqueue(Queue q,int x) {
+			
+			push(q.s,x);
+		}
+		
+		static int dequeue(Queue q) {
+			int x,r=0;
+			//if stack is empty then display underflow error condition
+			if(q.s.isEmpty()) {
+				System.out.println("Underflow..");
+				System.exit(0);
+			}
+			//if there is only 1 element return it
+			if(q.s.size()==1) {
+				return pop(q.s);
+			}
+			//recursively pop all elements from stack
+			else{
+				x=pop(q.s);
+				r=dequeue(q);
+				push(q.s,x);
+				return r;
+			}
+		}
+
+	public static void main(String[] args) {
+		Queue q=new Queue();
+		q.s=new Stack<>();
+		enqueue(q,1);
+		enqueue(q,2);
+		enqueue(q,3);
+		
+		System.out.println(dequeue(q));
+		System.out.println(dequeue(q));
+		System.out.println(dequeue(q));
+
+	}
+
+}
