@@ -1,0 +1,69 @@
+import java.util.*;
+public class customizedDS {
+	static class pair{
+		int e;
+		int m;
+		pair(int e, int m){
+			this.e=e;
+			this.m=m;
+		}
+	}
+	ArrayList<pair> a=new ArrayList<>();
+	int min;
+	customizedDS(){
+		this.min=Integer.MAX_VALUE;
+	}
+	void addElement(int x) {
+		if (a.size()==0 || x<min) {
+			min=x;
+		}
+		pair p=new pair(x,min);
+		a.add(p);
+	}
+	
+	int getLastElement() {
+		if (a.size()==0) {
+			System.out.println("underflow");
+			return -1;
+		}
+		return a.get(a.size()-1).e;
+	}
+	int getLastMinimum() {
+		if (a.size()==0) {
+			System.out.println("underflow");
+			return -1;
+		}
+		return a.get(a.size()-1).m;
+	}
+	void removeLastElement() {
+		if (a.size()==0) {
+			System.out.println("underflow");
+			System.exit(0);
+		}
+		if (a.size()>1) {
+			min=a.get(a.size()-2).m;
+		}
+		else {
+			min=Integer.MAX_VALUE;
+		}
+		a.remove(a.size()-1);
+	}
+
+	public static void main(String[] args) {
+		customizedDS o= new customizedDS();
+		o.addElement(1);
+		o.addElement(10);
+		o.addElement(12);
+		o.addElement(73);
+		//  1 10 12 73
+		System.out.println(o.getLastMinimum());
+		//1
+		System.out.println(o.getLastElement());
+		//73
+		o.removeLastElement();
+		System.out.println(o.getLastMinimum());
+		System.out.println(o.getLastElement());
+		//1 12
+	}
+
+}
